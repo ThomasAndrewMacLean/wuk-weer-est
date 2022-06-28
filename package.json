@@ -2,7 +2,7 @@
   "name": "wukweerest",
   "version": "1.0.0",
   "description": "",
-  "main": "api/index.cjs",
+  "main": "api/index.mjs",
   "type": "module",
   "scripts": {
     "start": "node ."
