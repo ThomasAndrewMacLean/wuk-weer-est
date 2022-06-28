@@ -27,6 +27,12 @@ let html = `<!DOCTYPE html>
         font-family: monospace;
         font-size: clamp(1rem, 56px, 5vw);
       }
+      footer{
+        position: absolute;
+        bottom: 15px;
+        font-size: 14px;
+      }
+      a{color: turquoise;}
     </style>
   </head>
   <body>
