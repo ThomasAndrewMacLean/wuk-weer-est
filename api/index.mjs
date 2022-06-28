@@ -14,6 +14,7 @@ const download = function (uri, filename, callback) {
     request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
   });
 };
+
 let originalImage = join(tmpdir(), "temp.jpg");
 let outputImage = join(tmpdir(), "temp_cropped.jpg");
 
@@ -24,8 +25,6 @@ app.get("/api", (req, res) => {
       "https://observatory.ugent.be/incoming/vsap_wolken.jpg",
       originalImage,
       function () {
-        let outputImage = "temp_cropped.jpg";
-
         sharp(originalImage)
           .extract({ width: 200, height: 150, left: 280, top: 320 })
           .toFile(outputImage)
