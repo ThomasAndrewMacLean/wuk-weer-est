@@ -14,8 +14,8 @@ const download = function (uri, filename, callback) {
     request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
   });
 };
-let originalImage = join(tmpdir, "temp.jpg");
-let outputImage = join(tmpdir, "temp_cropped.jpg");
+let originalImage = join(tmpdir(), "temp.jpg");
+let outputImage = join(tmpdir(), "temp_cropped.jpg");
 
 app.get("/api", (req, res) => {
   try {
