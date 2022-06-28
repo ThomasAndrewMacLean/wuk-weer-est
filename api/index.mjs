@@ -39,7 +39,13 @@ let html = `<!DOCTYPE html>
        Kan een korte broek? => KORTEBROEK
       </p>
     </p>
+
+    <footer>
+    <span>made with ❤️ by</span> 
+    <a rel="noopener noreferrer" target="_blank" href="https://thomasmaclean.be">thomasmaclean</a>
+     <span>YEAR</span></footer>
   </body>
+
 </html>
 `;
 const app = express();
