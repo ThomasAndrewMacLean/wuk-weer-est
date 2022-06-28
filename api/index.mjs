@@ -4,6 +4,9 @@ import { getAverageColor } from "fast-average-color-node";
 import sharp from "sharp";
 import fetch from "node-fetch";
 import express from "express";
+import { tmpdir } from "os";
+const { join } = require("path");
+
 const app = express();
 const port = process.env.PORT || 1234;
 const download = function (uri, filename, callback) {
@@ -11,7 +14,8 @@ const download = function (uri, filename, callback) {
     request(uri).pipe(fs.createWriteStream(filename)).on("close", callback);
   });
 };
-let originalImage = "temp.jpg";
+let originalImage = join(tmpdir, "temp.jpg");
+let outputImage = join(tmpdir, "temp_cropped.jpg");
 
 app.get("/api", (req, res) => {
   try {
