@@ -52,7 +52,7 @@ const download = function (uri, filename, callback) {
 let originalImage = join(tmpdir(), "temp.jpg");
 let outputImage = join(tmpdir(), "temp_cropped.jpg");
 
-app.get("/api", (req, res) => {
+app.get("/", (req, res) => {
   try {
     console.log("starting");
     download(
