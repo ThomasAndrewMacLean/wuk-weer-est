@@ -13,7 +13,7 @@ const download = function (uri, filename, callback) {
 };
 let originalImage = "temp.jpg";
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   download(
     "https://observatory.ugent.be/incoming/vsap_wolken.jpg",
     originalImage,
@@ -48,6 +48,8 @@ app.get("/", (req, res) => {
   );
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server running on port ${port}`);
+// });
+
+module.exports = app;
