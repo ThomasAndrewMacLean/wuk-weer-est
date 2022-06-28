@@ -89,6 +89,8 @@ app.get("/", (req, res) => {
                   html = html.replace("KORTEBROEK", korteBroek);
                   html = html.replace("AVG_LUCHT", color.hex);
                   html = html.replace("YEAR", new Date().getFullYear());
+                  res.setHeader('Content-Type', 'text/html');
+                  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
                   res.send(html);
                 });
             });
