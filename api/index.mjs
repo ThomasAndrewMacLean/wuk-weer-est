@@ -7,6 +7,40 @@ import express from "express";
 import { tmpdir } from "os";
 import { join } from "path";
 
+let html = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wuk weer est?</title>
+    <style>
+      body{
+        background: #111;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 75vh;
+        font-family: monospace;
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Wuk weer est?</h1>
+    <p>
+       De lucht ziet er zo uit:
+       <div style="height: 100px; width: 100px; background-color: AVG_LUCHT;"></div>
+   
+       <br><br>
+       Kan een korte broek? => KORTEBROEK
+      </p>
+    </p>
+  </body>
+</html>
+`;
 const app = express();
 const port = process.env.PORT || 1234;
 const download = function (uri, filename, callback) {
@@ -39,10 +73,9 @@ app.get("/api", (req, res) => {
                     .split("<title>Kan ik een korte broek aan? - ")[1]
                     .split(" </title>")[0];
 
-                  let template = fs.readFileSync("./index.html", "utf8");
-                  template = template.replace("KORTEBROEK", korteBroek);
-                  template = template.replace("AVG_LUCHT", color.hex);
-                  res.send(template);
+                  html = html.replace("KORTEBROEK", korteBroek);
+                  html = html.replace("AVG_LUCHT", color.hex);
+                  res.send(html);
                 });
             });
           })
