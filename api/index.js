@@ -14,38 +14,43 @@ const download = function (uri, filename, callback) {
 let originalImage = "temp.jpg";
 
 app.get("/api", (req, res) => {
-  download(
-    "https://observatory.ugent.be/incoming/vsap_wolken.jpg",
-    originalImage,
-    function () {
-      let outputImage = "temp_cropped.jpg";
+  try {
+    console.log("starting");
+    download(
+      "https://observatory.ugent.be/incoming/vsap_wolken.jpg",
+      originalImage,
+      function () {
+        let outputImage = "temp_cropped.jpg";
 
-      sharp(originalImage)
-        .extract({ width: 200, height: 150, left: 280, top: 320 })
-        .toFile(outputImage)
-        .then(function (new_file_info) {
-          console.log("Image cropped and saved");
-          getAverageColor(outputImage).then((color) => {
-            console.log(color);
-            fetch("https://www.kanikeenkortebroekaan.nl/")
-              .then((x) => x.text())
-              .then((x) => {
-                const korteBroek = x
-                  .split("<title>Kan ik een korte broek aan? - ")[1]
-                  .split(" </title>")[0];
+        sharp(originalImage)
+          .extract({ width: 200, height: 150, left: 280, top: 320 })
+          .toFile(outputImage)
+          .then(function (new_file_info) {
+            console.log("Image cropped and saved");
+            getAverageColor(outputImage).then((color) => {
+              console.log(color);
+              fetch("https://www.kanikeenkortebroekaan.nl/")
+                .then((x) => x.text())
+                .then((x) => {
+                  const korteBroek = x
+                    .split("<title>Kan ik een korte broek aan? - ")[1]
+                    .split(" </title>")[0];
 
-                let template = fs.readFileSync("./index.html", "utf8");
-                template = template.replace("KORTEBROEK", korteBroek);
-                template = template.replace("AVG_LUCHT", color.hex);
-                res.send(template);
-              });
+                  let template = fs.readFileSync("./index.html", "utf8");
+                  template = template.replace("KORTEBROEK", korteBroek);
+                  template = template.replace("AVG_LUCHT", color.hex);
+                  res.send(template);
+                });
+            });
+          })
+          .catch(function (err) {
+            console.log("An error occured");
           });
-        })
-        .catch(function (err) {
-          console.log("An error occured");
-        });
-    }
-  );
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // app.listen(port, () => {
