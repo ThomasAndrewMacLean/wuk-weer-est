@@ -25,7 +25,7 @@ let html = `<!DOCTYPE html>
         align-items: center;
         height: 75vh;
         font-family: monospace;
-        font-size: 2rem;
+        font-size: clamp(1rem, 56px, 5vw);
       }
     </style>
   </head>
