@@ -39,7 +39,7 @@ app.get("/api", (req, res) => {
                     .split("<title>Kan ik een korte broek aan? - ")[1]
                     .split(" </title>")[0];
 
-                  let template = fs.readFileSync("./index.html", "utf8");
+                  let template = fs.readFileSync("/index.html", "utf8");
                   template = template.replace("KORTEBROEK", korteBroek);
                   template = template.replace("AVG_LUCHT", color.hex);
                   res.send(template);
