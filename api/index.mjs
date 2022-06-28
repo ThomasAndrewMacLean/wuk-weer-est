@@ -82,6 +82,7 @@ app.get("/", (req, res) => {
 
                   html = html.replace("KORTEBROEK", korteBroek);
                   html = html.replace("AVG_LUCHT", color.hex);
+                  html = html.replace("YEAR", new Date().getFullYear());
                   res.send(html);
                 });
             });
