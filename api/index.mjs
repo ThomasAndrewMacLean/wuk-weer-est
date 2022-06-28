@@ -5,7 +5,7 @@ import sharp from "sharp";
 import fetch from "node-fetch";
 import express from "express";
 import { tmpdir } from "os";
-const { join } = require("path");
+import { join } from "path";
 
 const app = express();
 const port = process.env.PORT || 1234;
